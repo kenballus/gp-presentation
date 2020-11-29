@@ -32,7 +32,47 @@
 
     Examples: $$x^2 + y, z, xyz + 1 + 22x$$
 
+
+
+% Our Implementation}
 \newpage
-\section*{}
+\section*{Polynomial Representation}
+
+We use sorted-maps to represent polynomials. The structure of such a map that would represent $3x^2y^4 + 2x^3$ would be the following in python style syntax:
+
+\begin{verbatim}
+poly = {{:x : 2, :y :4} : 3, {:x : 3} : 2}
+\end{verbatim}
+
+ where we are maping each term to its coefficent where each term is a mapping from variables to their power.
+
+
+\newpage
+\section*{Instructions}
+
+Polynomial - \\
+\indent addition \\
+\indent subtraction     \\   
+\indent multiplicationA \\
+\indent division \\
+\indent lowest common multiplication \\
+\indent s-polynomial \\
+
+\noindent Input- \\
+\indent in1 $\rightarrow$ the query polynomial \\
+\indent in\_$n$th $\rightarrow$ the $n$\_th element of the generators where $n$ is taken of the integer stack. \\
+
+\noindent Exec- \\
+\indent exec-shove $\rightarrow$ Shoves the top element in the exec stack into the $n$th position of the stack where $n$ is poped off the integer stack. \\
+\indent exec-yank $\rightarrow$ Yanks the $n$th element from the exec stack and places it on top where $n$ is popped off the integer stack.
+\indent exec-dup $\rightarrow$ Duplicates the top element of the exec stack. \\
+\indent exec-if $\rightarrow$ Pops either the next element or the item after that off of the exec stack depending on the poped value off the top of the integer stack. \\
+\indent exec-if-zero-polynomial $\rightarrow$ Same functionality as exec-if except depends on the top element of the polynomial stack.
+
+
+\newpage
+\section*{Parent Selection and Error Computation}
+
+
 
 \end{document}
