@@ -88,7 +88,11 @@ We use sorted-maps to represent polynomials. The structure of such a map that wo
 {{:x : 2, :y :4} : 3, {:x : 3} : 2}
 \end{verbatim}
 
- where we are maping each term to its coefficent where each term is a mapping from variables to their power.
+where we are mapping each term to its coefficient where each term is a mapping from variables to their power.
+
+\subsection*{RevGrevlex}
+
+Specific ordering of monomials in a polynomial that allows systems like polynomial division and L.C.M to be much more efficient.
 
 \newpage
 \section*{Polynomial Instructions}
@@ -96,10 +100,22 @@ We use sorted-maps to represent polynomials. The structure of such a map that wo
 Polynomial - \\
 \indent addition \\
 \indent subtraction     \\   
-\indent multiplicationA \\
+\indent multiplication \\
 \indent division \\
 \indent lowest common multiplication \\
 \indent s-polynomial \\
+
+
+\newpage
+\section*{Polynomial Add}
+
+\begin{verbatim}
+
+(defn add-polynomials
+    [p1 p2]
+    (remove-zeros-from-polynomial (merge-with + p1 p2)))
+
+\end{verbatim}
 
 \newpage
 \section*{Other Instructions}
@@ -132,11 +148,11 @@ Polynomial - \\
  $$x > 25  \rightarrow 1 $$
  $$\rightarrow \frac{1}{1+e^{-x}}$$
 
-Smooth confidence predictions, within a bound to prevent endless competition. 
+\noindent Smooth confidence predictions, within a bound to prevent endless competition. 
 
-Positive test cases have a value of 1; negative of 0.
+\noindent Positive test cases have a value of 1; negative of 0.
 
-Error is the summed square of the differences between predicted 
+\noindent Error is the summed square of the differences between predicted 
 
 \newpage
 \section*{Parent Selection}
@@ -167,7 +183,9 @@ Removing crossover marginally improves the system by arriving at high accuracy i
 
 \noindent Modified $\rightarrow$ (remainder, ... rest of the polynomial stack)
 
-\noindent FAILED
+\noindent FAILED TO EVOLVE INDIVIDUALS
+
+
 
 
 \end{document}
