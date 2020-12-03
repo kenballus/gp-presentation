@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[20pt]{extarticle}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath, amssymb, amsthm}
@@ -84,8 +84,8 @@ poly = {{:x : 2, :y :4} : 3, {:x : 3} : 2}
 
  where we are maping each term to its coefficent where each term is a mapping from variables to their power.
 
-
-\section*{Instructions}
+\newpage
+\section*{Polynomial Instructions}
 
 Polynomial - \\
 \indent addition \\
@@ -95,27 +95,42 @@ Polynomial - \\
 \indent lowest common multiplication \\
 \indent s-polynomial \\
 
+\newpage
+\section*{Other Instructions}
+
 \noindent Input- \\
 \indent in1 $\rightarrow$ the query polynomial \\
 \indent in\_$n$th $\rightarrow$ the $n$\_th element of the generators where $n$ is taken of the integer stack. \\
 
 \noindent Exec- \\
-\indent exec-shove $\rightarrow$ Shoves the top element in the exec stack into the $n$th position of the stack where $n$ is poped off the integer stack. \\
-\indent exec-yank $\rightarrow$ Yanks the $n$th element from the exec stack and places it on top where $n$ is popped off the integer stack.
+\indent exec-shove $\rightarrow$ Shoves the top element in the exec stack into the $n$th position of the top. \\
+\indent exec-yank $\rightarrow$ Yanks the $n$th element from the exec stack and places it on top. \\
 \indent exec-dup $\rightarrow$ Duplicates the top element of the exec stack. \\
-\indent exec-if $\rightarrow$ Pops either the next element or the item after that off of the exec stack depending on the poped value off the top of the integer stack. \\
-\indent exec-if-zero-polynomial $\rightarrow$ Same functionality as exec-if except depends on the top element of the polynomial stack.
+\indent exec-if $\rightarrow$ If dependent on the integer stack \\
+\indent exec-if-zero-polynomial $\rightarrow$ If dependent on if the top polynomial is the 0 polynomial. \\
 
+% Getting into our implementation, the first thing we had to do was to build all the necessary building blocks for working with polynomials. This included all the typical operations: addition, subtraction, multiplication, and division, but also operations like lcm and s-polynomial. Before we could begin to write those, we had to settle on the best way to represent our polynomials using clojure's built in types. There were many suggestions, and unfortunately many changes after we had written some of our operations. We finally decided on relating a map to its coefficient where the key maps relate symbols to their power. Designing our polynomials this way allowed us to do a bunch of optimizations in terms of code complexity. A key function we used was that of the merge-with function which allowed us to combine maps using a specific function when there were keys that exist in both maps. With this function, operations like polynomial addition are as simple as (merge-with + p1 p2) 
+
+% 
+
+% As the desired output of our programs is an integer, we also saw it prudent to add a number of exec instructions, some of which change the control flow dependent on the state of the polynomial stack. This allows the result of polynomial calculations to impact the overall running of the program and thus the final result. 
 
 \newpage
-\section*{Parent Selection and Error Computation}
+\section*{Error Computation}
 
-Lexicase Selection
+\noindent Bounded Logistic flattening
 
-We use lexicase selection to decrease the computational time.
+\noindent Programs produce an integer on their integer stack. 
 
-Error Computation is performed on a strict subset of the tests every 10 generations. 
+ $$x < -25 \rightarrow 0 $$
+ $$x > 25  \rightarrow 1 $$
+ $$\rightarrow \frac{1}{1+e^{-x}}$$
 
+Smooth confidence predictions, within a bound to prevent endless competition. 
+
+Positive test cases have a value of 1; negative of 0.
+
+Error is the summed square of the differences between predicted 
 \newpage
 \section*{Test Case Generation}
 
