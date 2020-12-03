@@ -116,7 +116,7 @@ Polynomial - \\
 
 (defn add-polynomials
     [p1 p2]
-    (remove-zeros-from-polynomial (merge-with + p1 p2)))
+    (merge-with + p1 p2))
 
 \end{verbatim}
 
@@ -159,7 +159,9 @@ Polynomial - \\
 
 Lexicase selection
 
-Traditional tournament selection is far to slow
+Traditional tournament selection is far to slow. 
+
+We sub sample 50 test cases to improve running time.
 
 
 \newpage
@@ -175,7 +177,11 @@ Outputs each set of positive and negative test cases via formatting strings to b
 \section*{Experimentation}
 \subsection*{No Crossover}
 
-Removing crossover marginally improves the system by arriving at high accuracy individuals at a sooner generation.
+Removing crossover did not significantly improve the system.
+
+Did improve running time for each generation as the number of lexicase selections was reduced. 
+
+Did not arrive at a high accuracy individual significantly sooner.
 
 \subsection*{Modified Division}
 
@@ -183,9 +189,14 @@ Removing crossover marginally improves the system by arriving at high accuracy i
 
 \noindent Modified $\rightarrow$ (remainder, ... rest of the polynomial stack)
 
-\noindent FAILED TO EVOLVE INDIVIDUALS
+\noindent \textbf{FAILED TO EVOLVE INDIVIDUALS}
 
 
+\newpage
+\section*{Conclusion}
 
+Substantial more research to be done on this problem, especially given this proof of concept.
+
+Not replicating Buchberger's Algorithm $\rightarrow$ Something interesting.
 
 \end{document}
