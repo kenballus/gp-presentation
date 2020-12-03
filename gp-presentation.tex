@@ -88,18 +88,37 @@ We use sorted-maps to represent polynomials. The structure of such a map that wo
 {{:x : 2, :y :4} : 3, {:x : 3} : 2}
 \end{verbatim}
 
- where we are maping each term to its coefficent where each term is a mapping from variables to their power.
+where we are mapping each term to its coefficient where each term is a mapping from variables to their power.
 
+\subsection*{RevGrevlex}
+
+Specific ordering of monomials in a polynomial that allows systems like polynomial division and L.C.M to be much more efficient.
+
+% Getting into our implementation, the first thing we had to do was to build all the necessary building blocks for working with polynomials. This included all the typical operations: addition, subtraction, multiplication, and division, but also operations like lcm and s-polynomial. Before we could begin to write those, we had to settle on the best way to represent our polynomials using clojure's built in types. There were many suggestions, and unfortunately many changes after we had written some of our operations. We finally decided on relating a map to its coefficient where the key maps relate symbols to their power. Designing our polynomials this way allowed us to do a bunch of optimizations in terms of code complexity. A key function we used was that of the merge-with function which allowed us to combine maps using a specific function when there were keys that exist in both maps. We'll see an example of this in action in a moment. 
+
+% Another element of our polynomial representation worth mentioning is the ordering of the maps. We use a comparison function we're calling REV-grevlex. Requiring this ordering allows for optimizations in the writing of division and lowest common multiplication.
 \newpage
 \section*{Polynomial Instructions}
 
 Polynomial - \\
 \indent addition \\
 \indent subtraction     \\   
-\indent multiplicationA \\
+\indent multiplication \\
 \indent division \\
 \indent lowest common multiplication \\
 \indent s-polynomial \\
+
+
+\newpage
+\section*{Polynomial Add}
+
+\begin{verbatim}
+
+(defn add-polynomials
+    [p1 p2]
+    (remove-zeros-from-polynomial (merge-with + p1 p2)))
+
+\end{verbatim}
 
 \newpage
 \section*{Other Instructions}
@@ -115,12 +134,6 @@ Polynomial - \\
 \indent exec-if $\rightarrow$ If dependent on the integer stack \\
 \indent exec-if-zero-polynomial $\rightarrow$ If dependent on if the top polynomial is the 0 polynomial. \\
 
-% Getting into our implementation, the first thing we had to do was to build all the necessary building blocks for working with polynomials. This included all the typical operations: addition, subtraction, multiplication, and division, but also operations like lcm and s-polynomial. Before we could begin to write those, we had to settle on the best way to represent our polynomials using clojure's built in types. There were many suggestions, and unfortunately many changes after we had written some of our operations. We finally decided on relating a map to its coefficient where the key maps relate symbols to their power. Designing our polynomials this way allowed us to do a bunch of optimizations in terms of code complexity. A key function we used was that of the merge-with function which allowed us to combine maps using a specific function when there were keys that exist in both maps. With this function, operations like polynomial addition are as simple as (merge-with + p1 p2) 
-
-% 
-
-% As the desired output of our programs is an integer, we also saw it prudent to add a number of exec instructions, some of which change the control flow dependent on the state of the polynomial stack. This allows the result of polynomial calculations to impact the overall running of the program and thus the final result. 
-
 \newpage
 \section*{Error Computation}
 
@@ -130,13 +143,16 @@ Polynomial - \\
 
  $$x < -25 \rightarrow 0 $$
  $$x > 25  \rightarrow 1 $$
- $$\rightarrow \frac{1}{1+e^{-x}}$$
+ $$x \rightarrow \frac{1}{1+e^{-x}}$$
 
-Smooth confidence predictions, within a bound to prevent endless competition. 
+\noindent Smooth confidence predictions, within a bound to prevent endless competition. 
 
-Positive test cases have a value of 1; negative of 0.
+\noindent Positive test cases have a value of 1; negative of 0.
 
-Error is the summed square of the differences between predicted 
+\noindent Error is the summed square of the differences between predicted 
+
+% As the desired output of our programs is an integer, we also saw it prudent to add a number of exec instructions, some of which change the control flow dependent on the state of the polynomial stack. This allows the result of polynomial calculations to impact the overall running of the program and thus the final result. 
+
 
 \newpage
 \section*{Parent Selection}
@@ -166,7 +182,9 @@ Removing crossover marginally improves the system by arriving at high accuracy i
 
 \noindent Modified $\rightarrow$ (remainder, ... rest of the polynomial stack)
 
-\noindent FAILED
+\noindent FAILED TO EVOLVE INDIVIDUALS
+
+
 
 \end{document}
 
