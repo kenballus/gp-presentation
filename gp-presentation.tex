@@ -71,6 +71,10 @@
     Since $x+y$ is just the sum of the two generators, it's got to be in the ideal.
     However, $x + y$ is not divisible by $x+1$ or $y-1$, so the simple algorithm breaks down.
 
+    Still, you might notice that the remainder after dividing $x+y$ by $x+1$ is $-(y-1)$.
+    If we divide that remainder by $y-1$, we get a remainder of 0.
+    This is because I chose $x+1$ and $y-1$ in a special way; they form a Gr\"obner basis.
+
 \newpage
 \section*{The true algorithm.}
 
@@ -85,10 +89,10 @@
 We use sorted-maps to represent polynomials. The structure of such a map that would represent $3x^2y^4 + 2x^3$ would be the following in python style syntax:
 
 \begin{verbatim}
-{{:x : 2, :y :4} : 3, {:x : 3} : 2}
+{{:x : 2, :y :4} : 3, {:x : 3} : 2}.
 \end{verbatim}
 
-where we are mapping each term to its coefficient where each term is a mapping from variables to their power.
+In other words, we're mapping each term to its coefficient where each term is a mapping from variables to their power.
 
 \subsection*{RevGrevlex}
 
