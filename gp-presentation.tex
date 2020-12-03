@@ -220,15 +220,18 @@ Since it's easier to generate negative test cases, this can take a long time.
 Our first set of test cases used up to 3 variables, up to 3 monic terms per polynomial, a maximum exponent of 3, and up to 5 generators per ideal.
 Our second set of test cases used up to 3 variables, up to 5 terms with coefficients between -5 and 5 per polynomial, a maximum exponent of 5, up to 5 generators per ideal.
 
+% Talk about why generating test cases with more than 3 variables is hard
+% Talk about why this might mean our whole experiment is invalid
+
 \newpage
 \section*{Experimentation}
 \subsection*{No Crossover}
 
 Removing crossover did not significantly improve the system.
 
-Did improve running time for each generation as the number of lexicase selections was reduced. 
+Improved running time for each generation, since the number of lexicase selections was reduced. 
 
-Did not arrive at a high accuracy individual significantly sooner.
+Did not affect the amount of time it took to arrive at a high-accuracy individual.
 
 \subsection*{Modified Division}
 
@@ -242,9 +245,11 @@ Did not arrive at a high accuracy individual significantly sooner.
 \newpage
 \section*{Conclusion}
 
-Substantial more research to be done on this problem, especially given this proof of concept.
-
-Not replicating Buchberger's Algorithm $\rightarrow$ Something interesting.
+Clearly, there's a lot more research to be done on this problem.
+The fact that our programs are not replicating Buchberger's Algorithm is really exciting.
+However, our experimental setup isn't perfect.
+We mentioned earlier issues with test case generation and parent selection that could undermine our results.
+In the future, we'd like to come up with a technique for generating better test cases, and assessing programs more accurately.
 \end{document}
 
 
